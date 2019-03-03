@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "node-vibrant": "^3.2.0-alpha",
+    "twemoji": "^11.3.0",
     "vue": "^2.6.6"
   },
   "devDependencies": {

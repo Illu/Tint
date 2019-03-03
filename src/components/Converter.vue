@@ -1,17 +1,26 @@
 <template>
   <div>
-    <p>hey i'm the converter</p>
     <input type="file" name="pic" accept="image/*" ref="imageUpload" @change="onUpload">
-  </div>  
+    <div id="preview" :style="gradient"></div>
+    <p>{{DarkVibrant}}</p>
+    <p>{{LightVibrant}}</p>
+  </div>
 </template>
 
 <script>
-import * as Vibrant from 'node-vibrant'
+import Vibrant from "node-vibrant";
 
 export default {
-  data() {
+  data: function () {
     return {
       files: [],
+      DarkVibrant: '',
+      LightVibrant: '',
+    }
+  },
+  computed: {
+    gradient() {
+      return `background-image: linear-gradient(${this.DarkVibrant}, ${this.LightVibrant});`
     }
   },
   methods: {
@@ -21,18 +30,30 @@ export default {
     },
     generateGradient() {
       const reader = new FileReader();
-      const file = this.files[0]
-      reader.onload = function(e) {
+      const file = this.files[0];
+      reader.onload = e => {
         const v = new Vibrant(e.target.result);
-        v.getPalette((err, palette) => console.log("palette", palette))
-      }
+        v.getPalette((err, palette) => {
+          
+          this.DarkVibrant = palette.DarkVibrant.hex;
+          this.LightVibrant = palette.LightVibrant.hex;
+          console.log(this.DarkVibrant)
+        });
+      };
       reader.readAsDataURL(file);
     }
   }
-}
+};
 </script>
 
 <style>
+#preview {
+  height: 200px;
+  width: 200px;
+  background: grey;
+  
+}
+
 
 </style>
 
