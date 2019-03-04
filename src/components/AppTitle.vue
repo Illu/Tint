@@ -22,12 +22,15 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 3.5em;
+  font-size: 4em;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: 70px 0 10px 0;
+  color: white;
 }
 
 p {
   font-weight: 500;
+  margin-bottom: 50px;
+  color: white;
 }
 </style>
