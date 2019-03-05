@@ -1,8 +1,20 @@
 <template>
   <div class="wrapper">
     <label class="fileContainer">
-
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <polyline points="21 15 16 10 5 21"></polyline>
+      </svg>
       <span class="blue">&nbsp;Add an image</span>&nbsp;or drop it here
       <input
         class
@@ -28,27 +40,29 @@ export default {
   data: function() {
     return {
       files: [],
+      loading: false,
       DarkVibrant: "",
       LightVibrant: ""
     };
   },
   computed: {
     gradient() {
-      if (this.DarkVibrant && this.LightVibrant){
-      return `
+      if (this.DarkVibrant && this.LightVibrant) {
+        return `
       background-image: linear-gradient(${this.DarkVibrant}, ${
-        this.LightVibrant
-      });
+          this.LightVibrant
+        });
       margin: 30px 0;
       height: 200px;
       `;
       } else {
-        return "height: 0px;"
+        return "height: 0px;";
       }
     }
   },
   methods: {
     onUpload(evt) {
+      this.loading = true;
       this.files = evt.target.files;
       this.generateGradient();
     },
@@ -60,7 +74,7 @@ export default {
         v.getPalette((err, palette) => {
           this.DarkVibrant = palette.DarkVibrant.hex;
           this.LightVibrant = palette.LightVibrant.hex;
-          console.log(this.DarkVibrant);
+          this.loading = false;
         });
       };
       reader.readAsDataURL(file);
@@ -77,18 +91,17 @@ export default {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.2);
-  transition: ease .5s;
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.2);
+  transition: ease 0.5s;
   margin: 0 20px;
 }
 
 #preview {
-  
   height: 200px;
   width: 200px;
   border-radius: 12px;
   background: grey;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .fileContainer {

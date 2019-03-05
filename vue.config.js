@@ -6,7 +6,6 @@ module.exports = {
           test: /\.worker.js$/,
           loader: 'worker-loader',
         },
-
       ]
     }
   }

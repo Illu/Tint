@@ -1,21 +1,15 @@
 <template>
   <div>
-    <h1 v-html="title" />
-    <p>Generate a beautiful gradient from any image</p>
+    <h1>{{title}}</h1>
+    <p>{{subTitle}}</p>
   </div>
 </template>
 
 <script>
-import twemoji from 'twemoji';
-
 export default {
-  data:function () {
-    return {
-      title: "Tint"
-    }
-  },
   props: {
-    msg: String
+    title: String,
+    subTitle: String
   }
 }
 </script>
@@ -24,7 +18,7 @@ export default {
 h1 {
   font-size: 4em;
   font-weight: bold;
-  margin: 70px 0 10px 0;
+  margin: 50px 0 10px 0;
   color: white;
 }
 
